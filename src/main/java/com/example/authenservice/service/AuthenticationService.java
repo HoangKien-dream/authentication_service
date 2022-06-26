@@ -1,12 +1,15 @@
 package com.example.authenservice.service;
 
 import com.example.authenservice.entity.Account;
+import com.example.authenservice.entity.Permission;
 import com.example.authenservice.entity.Role;
 import com.example.authenservice.entity.dto.AccountDTO;
 import com.example.authenservice.entity.dto.RegisterDTO;
+import com.example.authenservice.entity.dto.RoleDTO;
 import com.example.authenservice.repository.AccountRepository;
 import com.example.authenservice.repository.RoleRepository;
 import com.example.authenservice.util.DateTimeHelper;
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -40,7 +43,11 @@ public class AuthenticationService implements UserDetailsService {
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (Role role :
                 account.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
+            for (Permission permission:
+                 role.getPermissions()) {
+                authorities.add(new SimpleGrantedAuthority(permission.getName()));
+            }
+//            authorities.add(new SimpleGrantedAuthority(new Gson().toJson(new RoleDTO(role))));
         }
         UserDetails userDetail
                 = new User(account.getUsername(), account.getPassword(), authorities);
