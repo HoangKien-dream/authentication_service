@@ -33,6 +33,12 @@ public class AuthenticationController {
         return ResponseEntity.ok().body(account);
     }
 
+    @RequestMapping(value = "/accounts/{username}",method = RequestMethod.GET)
+    public ResponseEntity<Object> getInformation(@PathVariable String username){
+        Account account = authenticationService.getAccount(username);
+        return ResponseEntity.ok().body(new AccountDTO(account));
+    }
+
     @RequestMapping(path = "/accounts",method = RequestMethod.PUT)
     public ResponseEntity<Object> updatedStatus(@RequestParam int id,
                                           @RequestParam int status){

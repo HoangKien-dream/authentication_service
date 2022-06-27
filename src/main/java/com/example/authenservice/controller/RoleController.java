@@ -22,4 +22,12 @@ public class RoleController {
     public Role addPermissonToRole(@RequestParam int id, @RequestParam int roleId){
         return roleService.addPermissionToRole(id,roleId);
     }
+    @RequestMapping(path = "delete",method = RequestMethod.DELETE)
+    public Role removePermission(@RequestParam int id, @RequestParam int roleId){
+        return roleService.removePermission(id,roleId);
+    }
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Role> getAll(){
+        return roleService.getAll();
+    }
 }

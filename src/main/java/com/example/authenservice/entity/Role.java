@@ -22,7 +22,6 @@ public class Role {
     @JsonIgnore
     @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<Account> accounts;
-    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(
             name = "permission_role",

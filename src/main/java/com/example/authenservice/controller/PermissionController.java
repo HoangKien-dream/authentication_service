@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "api/v1/permission")
 public class PermissionController {
@@ -17,5 +19,10 @@ public class PermissionController {
     @RequestMapping(method = RequestMethod.POST)
     public Permission save(@RequestBody Permission permission){
         return permissionService.save(permission);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Permission> getAll (){
+        return permissionService.getAll();
     }
 }
